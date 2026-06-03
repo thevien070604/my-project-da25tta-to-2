@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang = "vi">
 	<head> 
-		<title> Tính diện tích hình chữ nhật</title> 
+		<title>Tính diện tích hình chữ nhật</title> 
 		<meta charset = "utf-8">
 	</head> 
 	<body>
-		
-	<script>
-		let d = Number(prompt("Hãy nhập chiều dài hình chữ nhật: "));
-		let r = Number(prompt("Hãy nhập chiều rộng của hình chữ nhật: "));//Chuyển về trị số với Number
-		if(d<r)
-			alert("Chiều dài phải nhỏ hơn chiều rộng");
-		else if(d==r)
-			alert("TRƯỜNG HỢP ĐẠT BIỆT: Diện tích hình vuông là: + d*r ");
-		else 
-			alert("Diện tích hình chữ nhật là: " + d*r);
-	</script>
+	    <script>
+		    let d = Number(prompt("Hãy nhập chiều dài hình chữ nhật: "));
+		    let r = Number(prompt("Hãy nhập chiều rộng của hình chữ nhật: "));//Chuyển về trị số với Number
+		    if(d<r)
+			    alert("Chiều dài phải nhỏ hơn chiều rộng");
+		    else if(d==r)
+			    alert("TRƯỜNG HỢP ĐẠT BIỆT: Diện tích hình vuông là: " + d*r);
+		    else 
+			    alert("Diện tích hình chữ nhật là: " + d*r);
+	    </script>
 	</body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang = "vi">
+	<head> 
+		<title> Hóa đơn mua hàng</title> 
+		<meta charset = "utf-8">
+		<link rel = "stylesheet" href = "../css/style04.css">
+	</head> 
+	<body>
+		<table>
+            <caption>HÓA ĐƠN MUA HÀNG</caption>
+		    <tr>
+		         <th>STT</th>
+			     <th>Tên</th>
+			     <th>Số lượng</th>
+			     <th>Đơn giá</th>
+			     <th>Đvt</th>
+			     <th>Thành tiền</th>
+			</tr>
+			<tr>
+			     <td>1</td>
+				 <td>Mì Colusa</td>
+				 <td class = "soluong">2</td>
+				 <td class = "dongia">105</td>
+				 <td>thùng</td>
+				 <td class = "thanhtien">
+				    ?
+				</td>
+			</tr>	
+			<tr>
+			     <td>2</td>
+				 <td >Sữa ông Thọ</td>
+				 <td class = "soluong">4</td>
+				 <td class = "dongia">200</td>
+				 <td>thùng</td>
+				 <td class = "thanhtien">
+				    ?
+				</td>
+			</tr>	
+		    	<tr>
+			     <td>3</td>
+				 <td>Xúc xích CP</td>
+				 <td class = "soluong">120</td>
+				 <td class = "dongia">45</td>
+				 <td>túi</td>
+				 <td class = "thanhtien">
+				    ?
+				</td>
+			</tr>
+            <tr>
+                <td colspan = "5">Tổng thanh toán</td>
+				<td id = "thanhtoan">
+				    ?
+				</td>
+			</tr>
+		</table>
+	    <script>
+		    //Truy xuất đơn giá, thành tiền, số lượng qua class
+			const sl = document.getElementsByClassName("soluong");
+			const dg = document.getElementsByClassName("dongia");
+			const tt = document.getElementsByClassName("thanhtien");
+			
+			let tongthanhtoan = 0;
+			for(let i = 0; i<sl.length; i++)
+			{
+			    tt[i].innerHTML = Number(sl[i].innerHTML)*Number(dg[i].innerHTML);
+				tongthanhtoan += Number(tt[i].innerHTML);
+			}
+			document.getElementById("thanhtoan").innerHTML = tongthanhtoan;
+	    </script>
+	</body>
+</html>
