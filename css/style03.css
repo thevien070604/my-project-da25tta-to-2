@@ -1,18 +1,18 @@
 /*Viết mã css*/
         body{
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 30px 0;
             background-color: #f2f2f2;
         }
 
         .container{
-            width: 500px;
-            margin: 30px auto;
-            background: yellow;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px gray;
+           width: 800px;
+		   margin: 30px auto;
+           background: yellow;
+           padding: 25px 30px;
+           border-radius: 15px;
         }
-
         h2{
             text-align: center;
             color: darkblue;
@@ -29,7 +29,7 @@
         }
 
         .form-control{
-            width: 100%;
+            width: calc(100% - 16px);
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
