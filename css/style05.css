@@ -1,0 +1,133 @@
+/*Viết mã css*/
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Nền trang */
+body{
+    background: linear-gradient(135deg,#ffe6f0,#fff8fa);
+    min-height:100vh;
+    padding:40px 0;
+}
+
+/* Khung ngoài */
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:auto;
+}
+
+/* Danh sách sản phẩm */
+#product-list{
+    display:flex;
+    justify-content:center;
+}
+
+/* Card sản phẩm */
+.item{
+    width:700px;
+    background:white;
+    border-radius:20px;
+    display:flex;
+    gap:25px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    transition:0.4s;
+}
+
+/* Hiệu ứng khi rê chuột */
+.item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(255,105,180,0.4);
+}
+
+/* Khung ảnh */
+.image{
+    width:35%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Ảnh */
+.image img{
+    width:100%;
+    max-width:220px;
+    border-radius:15px;
+    transition:0.5s;
+}
+
+.image img:hover{
+    transform:scale(1.08);
+}
+
+/* Khung thông tin */
+.info{
+    width:65%;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Tên sản phẩm */
+.info p:first-child{
+    font-size:28px;
+    font-weight:bold;
+    color:#e91e63;
+    margin-bottom:15px;
+}
+
+/* Giá */
+.info p:nth-child(2){
+    font-size:24px;
+    font-weight:bold;
+    color:#ff5722;
+    margin-bottom:15px;
+}
+
+/* Mô tả */
+.info p:nth-child(3){
+    color:#555;
+    line-height:1.7;
+    text-align:justify;
+    margin-bottom:20px;
+}
+
+/* Nút xem chi tiết */
+.info a{
+    width:160px;
+    text-align:center;
+    text-decoration:none;
+    background:linear-gradient(45deg,#ff4081,#e91e63);
+    color:white;
+    padding:12px 20px;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.4s;
+}
+
+.info a:hover{
+    background:linear-gradient(45deg,#e91e63,#c2185b);
+    transform:scale(1.05);
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .item{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .image,
+    .info{
+        width:100%;
+    }
+
+    .info a{
+        margin:auto;
+    }
+}
