@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi Tiết Sản Phẩm - MotoShop</title>
+    <title>Liên Hệ - MotoShop</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -29,9 +29,9 @@
             </a>
             <nav class="main-nav">
                 <a href="page8.html">Trang chủ</a>
-                <a href="san-pham.html" class="active">Sản phẩm</a>
+                <a href="san-pham.html">Sản phẩm</a>
                 <a href="gioi-thieu.html">Giới thiệu</a>
-                <a href="lien-he.html">Liên hệ</a>
+                <a href="lien-he.html" class="active">Liên hệ</a>
             </nav>
             <div class="header-actions">
                 <div style="position:relative;">
@@ -54,75 +54,98 @@
     <!-- ============ BREADCRUMB ============ -->
     <div class="breadcrumb">
         <div class="container">
-            <a href="page8.html">Trang chủ</a> <i class="fa-solid fa-angle-right"></i>
-            <a href="san-pham.html">Sản phẩm</a> <i class="fa-solid fa-angle-right"></i>
-            <span id="breadcrumb-name">Chi tiết xe</span>
+            <a href="page8.html">Trang chủ</a> <i class="fa-solid fa-angle-right"></i> Liên hệ
         </div>
     </div>
 
-    <!-- ============ CHI TIẾT SẢN PHẨM ============ -->
+    <!-- ============ NỘI DUNG LIÊN HỆ ============ -->
     <section class="section" style="padding-top:40px;">
         <div class="container">
-            <div class="detail-wrapper" id="detail-wrapper">
-                <!-- Bộ ảnh -->
-                <div class="detail-gallery">
-                    <img src="" alt="Ảnh xe" class="detail-main-img" id="detail-main-img">
-                    <div class="detail-thumbs" id="detail-thumbs"></div>
-                </div>
-
-                <!-- Thông tin sản phẩm -->
-                <div class="detail-info">
-                    <span class="detail-brand" id="detail-brand"></span>
-                    <h1 class="detail-title" id="detail-title"></h1>
-
-                    <div class="detail-rating">
-                        <span id="detail-stars"></span>
-                        <span id="detail-rating-num"></span>
-                    </div>
-
-                    <div class="detail-price-box">
-                        <div>
-                            <div class="price-new" id="detail-price-new"></div>
-                            <div class="price-old" id="detail-price-old"></div>
-                        </div>
-                        <div class="stock-status">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span id="detail-stock"></span>
-                        </div>
-                    </div>
-
-                    <table class="spec-table">
-                        <tr><td><i class="fa-solid fa-gear"></i> Động cơ</td><td id="detail-engine"></td></tr>
-                        <tr><td><i class="fa-solid fa-gas-pump"></i> Mức tiêu hao nhiên liệu</td><td id="detail-fuel"></td></tr>
-                        <tr><td><i class="fa-solid fa-motorcycle"></i> Loại xe</td><td id="detail-category"></td></tr>
-                        <tr><td><i class="fa-solid fa-palette"></i> Màu sắc</td><td id="detail-color"></td></tr>
-                        <tr><td><i class="fa-solid fa-calendar"></i> Năm sản xuất</td><td id="detail-year"></td></tr>
-                        <tr><td><i class="fa-solid fa-shield-halved"></i> Bảo hành</td><td>3 năm hoặc 30.000 km chính hãng</td></tr>
-                    </table>
-
-                    <p class="detail-desc" id="detail-desc"></p>
-
-                    <div class="detail-actions">
-                        <button class="btn btn-outline" id="detail-add-cart">
-                            <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ hàng
-                        </button>
-                        <button class="btn btn-primary" id="detail-buy-now">
-                            <i class="fa-solid fa-bolt"></i> Mua ngay
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============ SẢN PHẨM LIÊN QUAN ============ -->
-    <section class="section" style="background:var(--color-gray-light);">
-        <div class="container">
             <div class="section-title reveal">
-                <h2>Sản Phẩm Liên Quan</h2>
-                <p>Các mẫu xe khác cùng thương hiệu bạn có thể quan tâm</p>
+                <h2>Liên Hệ Với Chúng Tôi</h2>
+                <p>MotoShop luôn sẵn sàng lắng nghe và hỗ trợ bạn mọi lúc</p>
             </div>
-            <div class="product-grid" id="related-products"></div>
+
+            <div class="contact-layout">
+                <!-- Thông tin liên hệ -->
+                <div class="contact-info-card reveal">
+                    <div class="contact-info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <strong>Địa chỉ showroom</strong>
+                            <span>126, Nguyễn Thiện Thành, Khóm 4, Phường Hòa Thuận, Tỉnh Vĩnh Long</span>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <strong>Số điện thoại</strong>
+                            <span>0869 255 827 - 0783 786 992</span>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <span>contact@thevienmotor.vn</span>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <div>
+                            <strong>Giờ làm việc</strong>
+                            <span>Thứ 2 - Chủ nhật: 8:00 - 21:00</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-map">
+                        <iframe
+                            src="https://maps.google.com/maps?q=126%20Nguyễn%20Thiện%20Thành,%20Phường%20Hòa%20Thuận,%20Vĩnh%20Long&output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Bản đồ MotoShop">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Form liên hệ -->
+                <div class="contact-form-card reveal">
+                    <h3 style="margin-bottom:24px;">Gửi Yêu Cầu Tư Vấn</h3>
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cf-name">Họ và tên</label>
+                                <input type="text" id="cf-name" placeholder="Nhập họ và tên của bạn" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-phone">Số điện thoại</label>
+                                <input type="tel" id="cf-phone" placeholder="Nhập số điện thoại" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-email">Email</label>
+                            <input type="email" id="cf-email" placeholder="Nhập địa chỉ email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-subject">Chủ đề</label>
+                            <select id="cf-subject">
+                                <option>Tư vấn mua xe</option>
+                                <option>Hỗ trợ bảo hành</option>
+                                <option>Góp ý dịch vụ</option>
+                                <option>Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-message">Nội dung</label>
+                            <textarea id="cf-message" placeholder="Nhập nội dung bạn muốn liên hệ..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa-solid fa-paper-plane"></i> Gửi yêu cầu
+                        </button>
+                        <div class="form-msg" id="form-msg"></div>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 

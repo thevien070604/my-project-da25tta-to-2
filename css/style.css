@@ -1,0 +1,1512 @@
+/* =====================================================
+   FILE: style.css
+   MÔ TẢ: File CSS chính cho website bán xe máy
+   Tác giả: Từ Thế Viễn
+   Ghi chú: Sử dụng biến CSS (CSS Variables) để dễ dàng
+            tùy chỉnh màu sắc và các thông số chung.
+   ===================================================== */
+
+/* ============ 1. RESET & BIẾN TOÀN CỤC ============ */
+:root {
+    /* Màu chủ đạo của thương hiệu */
+    --color-primary: #0A6CFF;       /* Xanh dương chủ đạo */
+    --color-primary-dark: #0850C4;  /* Xanh dương đậm hơn khi hover */
+    --color-primary-light: #E8F1FF; /* Xanh dương nhạt cho nền */
+    --color-white: #FFFFFF;
+    --color-gray-light: #F5F6FA;    /* Xám nhạt nền */
+    --color-gray: #8A94A6;          /* Xám chữ phụ */
+    --color-dark: #1A1F2B;          /* Đen xanh cho chữ chính */
+    --color-danger: #FF4C4C;        /* Đỏ cho giảm giá / cảnh báo */
+    --color-success: #12B76A;       /* Xanh lá cho trạng thái còn hàng */
+    --color-star: #FFB800;          /* Vàng cho đánh giá sao */
+
+    /* Taskbar giống Windows */
+    --taskbar-bg: #062B60;
+    --taskbar-height: 48px;
+
+    /* Bo góc và đổ bóng dùng chung toàn site */
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow-soft: 0 4px 16px rgba(10, 30, 70, 0.08);
+    --shadow-hover: 0 10px 30px rgba(10, 30, 70, 0.16);
+
+    /* Font chữ */
+    --font-main: 'Poppins', sans-serif;
+
+    /* Thời gian chuyển động dùng chung */
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scroll toàn trang */
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    line-height: 1.6;
+    /* Chừa khoảng trống cho header cố định + taskbar cố định */
+    padding-bottom: var(--taskbar-height);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+button {
+    font-family: var(--font-main);
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+/* ============ 2. TIỆN ÍCH DÙNG CHUNG (UTILITIES) ============ */
+.section {
+    padding: 70px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-dark);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--color-primary);
+}
+
+.section-title p {
+    color: var(--color-gray);
+    margin-top: 18px;
+    font-size: 15px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 6px 16px rgba(10, 108, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(10, 108, 255, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-3px);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Hiệu ứng animation khi cuộn trang tới (AOS đơn giản, tự viết bằng JS) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============ 3. LOADING SCREEN ============ */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--color-white);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-ring {
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--color-primary-light);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+.loader-text {
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 1px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============ 4. HEADER ============ */
+#site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+#site-header.scrolled {
+    box-shadow: var(--shadow-hover);
+    background: var(--color-white);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 82px;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.logo img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow-soft);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-text strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.logo-text span {
+    font-size: 11px;
+    color: var(--color-gray);
+    letter-spacing: 1px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 34px;
+}
+
+.main-nav a {
+    position: relative;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-dark);
+    padding: 8px 2px;
+    transition: var(--transition);
+}
+
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--color-primary);
+    transition: var(--transition);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--color-primary);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--color-gray-light);
+    border-radius: 30px;
+    padding: 8px 16px;
+    gap: 8px;
+    width: 220px;
+    transition: var(--transition);
+}
+
+.search-box:focus-within {
+    box-shadow: 0 0 0 2px var(--color-primary);
+    background: var(--color-white);
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-main);
+    font-size: 13px;
+    width: 100%;
+}
+
+.search-box i {
+    color: var(--color-gray);
+}
+
+.icon-btn {
+    position: relative;
+    font-size: 19px;
+    color: var(--color-dark);
+    transition: var(--transition);
+}
+
+.icon-btn:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.cart-count {
+    position: absolute;
+    top: -9px;
+    right: -11px;
+    background: var(--color-danger);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    color: var(--color-dark);
+}
+
+/* Kết quả tìm kiếm gợi ý */
+.search-results {
+    position: absolute;
+    top: 62px;
+    right: 0;
+    width: 320px;
+    max-height: 360px;
+    overflow-y: auto;
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hover);
+    display: none;
+    z-index: 1200;
+}
+
+.search-results.show {
+    display: block;
+}
+
+.search-result-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+    align-items: center;
+    border-bottom: 1px solid var(--color-gray-light);
+    transition: var(--transition);
+}
+
+.search-result-item:last-child { border-bottom: none; }
+
+.search-result-item:hover {
+    background: var(--color-primary-light);
+}
+
+.search-result-item img {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.search-result-item .sr-info strong {
+    font-size: 13px;
+    display: block;
+}
+
+.search-result-item .sr-info span {
+    font-size: 12px;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.search-empty {
+    padding: 16px;
+    text-align: center;
+    color: var(--color-gray);
+    font-size: 13px;
+}
+
+/* ============ 5. HERO BANNER / SLIDER ============ */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 560px;
+    margin-top: 82px;
+    overflow: hidden;
+    background: var(--color-dark);
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.9s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+.hero-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(6,20,50,0.88) 0%, rgba(6,20,50,0.55) 55%, rgba(6,20,50,0.25) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    color: var(--color-white);
+    max-width: 560px;
+}
+
+.hero-content span.tag {
+    display: inline-block;
+    background: var(--color-primary);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+}
+
+.hero-content h1 {
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.hero-content p {
+    font-size: 15px;
+    color: #D9E2F5;
+    margin-bottom: 28px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 16px;
+}
+
+.hero-dots {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 4;
+}
+
+.hero-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.hero-dots span.active {
+    background: var(--color-primary);
+    width: 28px;
+    border-radius: 6px;
+}
+
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    font-size: 18px;
+    transition: var(--transition);
+}
+
+.hero-arrow:hover {
+    background: var(--color-primary);
+}
+
+.hero-arrow.prev { left: 26px; }
+.hero-arrow.next { right: 26px; }
+
+/* ============ 6. THANH TIỆN ÍCH (USP) ============ */
+.usp-strip {
+    background: var(--color-gray-light);
+    padding: 26px 0;
+}
+
+.usp-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.usp-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.usp-item i {
+    font-size: 26px;
+    color: var(--color-primary);
+    background: var(--color-white);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
+}
+
+.usp-item strong {
+    display: block;
+    font-size: 14px;
+}
+
+.usp-item span {
+    font-size: 12px;
+    color: var(--color-gray);
+}
+
+/* ============ 7. TABS DANH MỤC (NỔI BẬT / BÁN CHẠY / MỚI / KHUYẾN MÃI) ============ */
+.tabs-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: var(--color-gray-light);
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark);
+    transition: var(--transition);
+}
+
+.tab-btn:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.tab-btn.active {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* ============ 8. LƯỚI SẢN PHẨM & THẺ SẢN PHẨM ============ */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.product-card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.product-thumb {
+    position: relative;
+    overflow: hidden;
+    height: 190px;
+    background: var(--color-gray-light);
+}
+
+.product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-thumb img {
+    transform: scale(1.12);
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--color-danger);
+    color: var(--color-white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 30px;
+    z-index: 2;
+}
+
+.badge.new {
+    background: var(--color-success);
+    left: auto;
+    right: 12px;
+}
+
+.product-info {
+    padding: 16px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.product-brand {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.product-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-dark);
+    min-height: 42px;
+}
+
+.product-rating {
+    color: var(--color-star);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.product-rating span {
+    color: var(--color-gray);
+    margin-left: 4px;
+}
+
+.product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.price-new {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.price-old {
+    font-size: 13px;
+    color: var(--color-gray);
+    text-decoration: line-through;
+}
+
+.product-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.product-actions .btn {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 12.5px;
+}
+
+/* ============ 9. BANNER KHUYẾN MÃI ============ */
+.promo-banner {
+    background: linear-gradient(120deg, var(--color-primary) 0%, #063E9C 100%);
+    border-radius: var(--radius);
+    padding: 50px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-white);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.promo-banner h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.promo-banner p {
+    color: #D9E7FF;
+    font-size: 14px;
+}
+
+.promo-banner .btn-primary {
+    background: var(--color-white);
+    color: var(--color-primary);
+}
+
+.promo-banner .btn-primary:hover {
+    background: var(--color-gray-light);
+}
+
+/* ============ 10. FILTER SIDEBAR (TRANG SẢN PHẨM) ============ */
+.shop-layout {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.filter-box {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 22px;
+    position: sticky;
+    top: 100px;
+}
+
+.filter-box h4 {
+    font-size: 15px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-gray-light);
+}
+
+.filter-group {
+    margin-bottom: 22px;
+}
+
+.filter-group h5 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--color-dark);
+}
+
+.filter-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--color-gray);
+    cursor: pointer;
+}
+
+.filter-check input {
+    accent-color: var(--color-primary);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.filter-check:hover { color: var(--color-dark); }
+
+.price-range input[type="range"] {
+    width: 100%;
+    accent-color: var(--color-primary);
+}
+
+.price-range-value {
+    font-size: 12px;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+.shop-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    background: var(--color-white);
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.shop-toolbar .result-count {
+    font-size: 13px;
+    color: var(--color-gray);
+}
+
+.shop-toolbar select {
+    padding: 9px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #E3E7EF;
+    font-family: var(--font-main);
+    font-size: 13px;
+    color: var(--color-dark);
+    background: var(--color-white);
+}
+
+.shop-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.no-result {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--color-gray);
+    grid-column: 1/-1;
+}
+
+.no-result i {
+    font-size: 46px;
+    color: var(--color-primary-light);
+    margin-bottom: 16px;
+}
+
+/* ============ 11. TRANG CHI TIẾT SẢN PHẨM ============ */
+.detail-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.detail-gallery {
+    position: sticky;
+    top: 100px;
+}
+
+.detail-main-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    background: var(--color-gray-light);
+}
+
+.detail-thumbs {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.detail-thumbs img {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.detail-thumbs img:hover,
+.detail-thumbs img.active {
+    opacity: 1;
+    border-color: var(--color-primary);
+}
+
+.detail-brand {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.detail-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-star);
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.detail-rating span {
+    color: var(--color-gray);
+    font-size: 13px;
+}
+
+.detail-price-box {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.detail-price-box .price-new {
+    font-size: 28px;
+}
+
+.stock-status {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-success);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.spec-table tr {
+    border-bottom: 1px solid var(--color-gray-light);
+}
+
+.spec-table td {
+    padding: 12px 6px;
+    font-size: 14px;
+}
+
+.spec-table td:first-child {
+    color: var(--color-gray);
+    width: 40%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spec-table td:last-child {
+    font-weight: 600;
+}
+
+.detail-desc {
+    font-size: 14px;
+    color: var(--color-gray);
+    margin: 18px 0;
+    line-height: 1.8;
+}
+
+.detail-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.detail-actions .btn {
+    flex: 1;
+    padding: 16px;
+    font-size: 15px;
+}
+
+/* ============ 12. TRANG GIỚI THIỆU ============ */
+.about-hero {
+    background: linear-gradient(120deg, var(--color-dark) 0%, #0A2E63 100%);
+    color: var(--color-white);
+    padding: 110px 0 70px;
+    text-align: center;
+    margin-top: 82px;
+}
+
+.about-hero h1 {
+    font-size: 38px;
+    margin-bottom: 14px;
+}
+
+.about-hero p {
+    color: #C9D6EE;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-grid img {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+}
+
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.value-card {
+    background: var(--color-white);
+    padding: 30px 22px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.value-card i {
+    font-size: 30px;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+}
+
+.value-card h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.value-card p {
+    font-size: 13px;
+    color: var(--color-gray);
+}
+
+.timeline {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 30px;
+    border-left: 3px solid var(--color-primary-light);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 34px;
+    padding-left: 20px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -39px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: 3px solid var(--color-primary-light);
+}
+
+.timeline-item strong {
+    color: var(--color-primary);
+    font-size: 13px;
+}
+
+.timeline-item h4 {
+    margin: 6px 0;
+}
+
+.timeline-item p {
+    color: var(--color-gray);
+    font-size: 13px;
+}
+
+/* ============ 13. TRANG LIÊN HỆ ============ */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+}
+
+.contact-info-card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 30px;
+}
+
+.contact-info-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.contact-info-item i {
+    font-size: 20px;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-info-item strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.contact-info-item span, .contact-info-item p {
+    font-size: 13px;
+    color: var(--color-gray);
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 240px;
+    border: none;
+    border-radius: var(--radius);
+    margin-top: 10px;
+}
+
+.contact-form-card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: 34px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #E3E7EF;
+    font-family: var(--font-main);
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-msg {
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-success);
+    display: none;
+}
+
+.form-msg.show { display: block; }
+
+/* ============ 14. BREADCRUMB ============ */
+.breadcrumb {
+    margin-top: 82px;
+    background: var(--color-gray-light);
+    padding: 18px 0;
+    font-size: 13px;
+    color: var(--color-gray);
+}
+
+.breadcrumb a { color: var(--color-primary); }
+.breadcrumb i { margin: 0 6px; font-size: 10px; }
+
+/* ============ 15. FOOTER ============ */
+#site-footer {
+    background: var(--color-dark);
+    color: #B7C0D6;
+    padding: 60px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: 34px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-about .logo-text strong { color: var(--color-white); }
+.footer-about p { font-size: 13px; margin: 14px 0; }
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.footer-social a:hover {
+    background: var(--color-primary);
+    transform: translateY(-3px);
+}
+
+.footer-col h4 {
+    color: var(--color-white);
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+.footer-col ul li a:hover {
+    color: var(--color-primary);
+    padding-left: 4px;
+}
+
+.footer-col p {
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 12px;
+}
+
+/* ============ 16. TASKBAR GIỐNG WINDOWS ============ */
+#windows-taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--taskbar-height);
+    background: var(--taskbar-bg);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    z-index: 2000;
+    font-size: 12px;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.25);
+}
+
+.taskbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.taskbar-center {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 11.5px;
+}
+
+.taskbar-center span {
+    opacity: 0.75;
+    margin-right: 4px;
+}
+
+.taskbar-center b {
+    font-weight: 600;
+}
+
+.taskbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    white-space: nowrap;
+}
+
+#taskbar-clock {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+#taskbar-date {
+    opacity: 0.8;
+}
+
+#back-to-top {
+    background: var(--color-primary);
+    color: var(--color-white);
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+#back-to-top:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-3px);
+}
+
+/* ============ 17. GIỎ HÀNG TOAST NOTIFICATION ============ */
+#toast {
+    position: fixed;
+    bottom: 70px;
+    right: 24px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    padding: 14px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 3000;
+    transform: translateY(120%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+#toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#toast i {
+    color: var(--color-success);
+}
+
+/* ============ 18. RESPONSIVE ============ */
+@media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+    .shop-product-grid { grid-template-columns: repeat(2, 1fr); }
+    .shop-layout { grid-template-columns: 220px 1fr; }
+    .detail-wrapper { grid-template-columns: 1fr; }
+    .detail-gallery { position: static; }
+    .about-grid { grid-template-columns: 1fr; }
+    .value-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-layout { grid-template-columns: 1fr; }
+    .taskbar-center { display: none; }
+}
+
+@media (max-width: 860px) {
+    .main-nav { display: none; }
+    .search-box { display: none; }
+    .menu-toggle { display: block; }
+
+    .main-nav.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 82px;
+        left: 0;
+        width: 100%;
+        background: var(--color-white);
+        padding: 20px;
+        gap: 6px;
+        box-shadow: var(--shadow-hover);
+    }
+
+    .main-nav.mobile-open a {
+        padding: 12px 10px;
+        border-bottom: 1px solid var(--color-gray-light);
+    }
+
+    .usp-list { grid-template-columns: repeat(2, 1fr); }
+    .hero-content h1 { font-size: 32px; }
+    .hero-content { max-width: 100%; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .shop-product-grid { grid-template-columns: 1fr; }
+    .shop-layout { grid-template-columns: 1fr; }
+    .filter-box { position: static; }
+    .form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+    .hero-slider { height: 480px; }
+    .hero-content h1 { font-size: 26px; }
+    .product-grid { grid-template-columns: 1fr 1fr; }
+    .value-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    #windows-taskbar { flex-wrap: wrap; height: auto; padding: 8px; gap: 6px; }
+    body { padding-bottom: 90px; }
+    .taskbar-right { gap: 10px; }
+    .promo-banner { flex-direction: column; text-align: center; }
+    .hero-btns { flex-wrap: wrap; }
+}
