@@ -53,9 +53,18 @@
                     </div>
                     <div class="search-results"></div>
                 </div>
-                <a href="#" class="icon-btn" title="Tài khoản">
-                    <i class="fa-regular fa-user"></i>
-                </a>
+
+                <!-- CẬP NHẬT: Nút tài khoản kèm Menu Dropdown Đăng nhập / Đăng ký -->
+                <div class="account-dropdown-wrapper">
+                    <a href="#" class="icon-btn" title="Tài khoản" id="account-btn">
+                        <i class="fa-regular fa-user"></i>
+                    </a>
+                    <div class="account-dropdown">
+                        <button class="dropdown-item" id="open-login-btn"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</button>
+                        <button class="dropdown-item" id="open-register-btn"><i class="fa-solid fa-user-plus"></i> Đăng ký</button>
+                    </div>
+                </div>
+
                 <a href="#" class="icon-btn" title="Giỏ hàng">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">0</span>
@@ -66,6 +75,65 @@
             </div>
         </div>
     </header>
+
+    <!-- BỔ SUNG: Cửa sổ Popup Form Đăng nhập / Đăng ký (Đặt ngay dưới Header) -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <button class="auth-modal-close" id="close-auth-btn">&times;</button>
+            
+            <!-- Tab Form đầu popup -->
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" data-target="login-form-panel">Đăng nhập</button>
+                <button class="auth-tab-btn" data-target="register-form-panel">Đăng ký</button>
+            </div>
+
+            <!-- Form Đăng Nhập -->
+            <div class="auth-panel active" id="login-form-panel">
+                <form id="form-login-submit">
+                    <div class="form-group-auth">
+                        <label>Tên đăng nhập / Email</label>
+                        <input type="text" placeholder="Nhập tài khoản hoặc email" required>
+                    </div>
+                    <div class="form-group-auth">
+                        <label>Mật khẩu</label>
+                        <input type="password" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <div class="auth-options">
+                        <label class="remember-me"><input type="checkbox"> Ghi nhớ đăng nhập</label>
+                        <a href="#" class="forgot-pass">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                </form>
+            </div>
+
+            <!-- Form Đăng Ký -->
+            <div class="auth-panel" id="register-form-panel">
+                <form id="form-register-submit">
+                    <div class="form-group-auth">
+                        <label>Họ và tên</label>
+                        <input type="text" placeholder="Nhập họ và tên" required>
+                    </div>
+                    <div class="form-group-auth">
+                        <label>Số điện thoại</label>
+                        <input type="tel" placeholder="Nhập số điện thoại" required>
+                    </div>
+                    <div class="form-group-auth">
+                        <label>Email</label>
+                        <input type="email" placeholder="Nhập địa chỉ email" required>
+                    </div>
+                    <div class="form-group-auth">
+                        <label>Mật khẩu</label>
+                        <input type="password" placeholder="Tối thiểu 6 ký tự" required>
+                    </div>
+                    <div class="form-group-auth">
+                        <label>Xác nhận mật khẩu</label>
+                        <input type="password" placeholder="Nhập lại mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Đăng ký tài khoản</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- ============ HERO BANNER / SLIDER ============ -->
     <section class="hero-slider">

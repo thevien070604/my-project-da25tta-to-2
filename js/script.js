@@ -645,7 +645,70 @@ function initLoadingScreen() {
 }
 
 /* =====================================================
-   18. KHỞI CHẠY TOÀN BỘ KHI DOM SẴN SÀNG
+   18. CHỨC NĂNG ĐĂNG NHẬP / ĐĂNG KÝ (POPUP MODAL)
+   ===================================================== */
+function initAuthModal() {
+    const modal = document.getElementById("auth-modal");
+    const openLoginBtn = document.getElementById("open-login-btn");
+    const openRegisterBtn = document.getElementById("open-register-btn");
+    const closeBtn = document.getElementById("close-auth-btn");
+    const tabButtons = document.querySelectorAll(".auth-tab-btn");
+    const panels = document.querySelectorAll(".auth-panel");
+
+    if (!modal) return;
+
+    // Hàm mở Modal và chuyển tới Form mong muốn
+    function openModal(targetPanelId, activeTabButton) {
+        modal.classList.add("show");
+        panels.forEach(p => p.classList.remove("active"));
+        tabButtons.forEach(b => b.classList.remove("active"));
+        
+        document.getElementById(targetPanelId).classList.add("active");
+        activeTabButton.classList.add("active");
+    }
+
+    // Sự kiện click nút từ Dropdown
+    openLoginBtn.addEventListener("click", () => {
+        openModal("login-form-panel", tabButtons[0]);
+    });
+
+    openRegisterBtn.addEventListener("click", () => {
+        openModal("register-form-panel", tabButtons[1]);
+    });
+
+    // Sự kiện đóng Modal
+    closeBtn.addEventListener("click", () => modal.classList.remove("show"));
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("show");
+    });
+
+    // Chuyển đổi qua lại giữa 2 Tab ngay trong Popup
+    tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            tabButtons.forEach(b => b.classList.remove("active"));
+            panels.forEach(p => p.classList.remove("active"));
+
+            btn.classList.add("active");
+            document.getElementById(btn.dataset.target).classList.add("active");
+        });
+    });
+
+    // Xử lý gửi biểu mẫu mô phỏng (Tận dụng hàm Toast có sẵn của đồ án)
+    document.getElementById("form-login-submit").addEventListener("submit", (e) => {
+        e.preventDefault();
+        modal.classList.remove("show");
+        showToast("Đăng nhập tài khoản thành công!");
+    });
+
+    document.getElementById("form-register-submit").addEventListener("submit", (e) => {
+        e.preventDefault();
+        modal.classList.remove("show");
+        showToast("Đăng ký tài khoản thành công! Vui lòng kiểm tra email.");
+    });
+}
+
+/* =====================================================
+   19. KHỞI CHẠY TOÀN BỘ KHI DOM SẴN SÀNG
    ===================================================== */
 document.addEventListener("DOMContentLoaded", () => {
     initLoadingScreen();
@@ -660,5 +723,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initHomeProducts();
     initShopPage();
     initDetailPage();
+	initAuthModal();
     observeReveal();
 });

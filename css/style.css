@@ -1510,3 +1510,185 @@ button {
     .promo-banner { flex-direction: column; text-align: center; }
     .hero-btns { flex-wrap: wrap; }
 }
+
+/* ============ BỔ SUNG: CSS CHO ĐĂNG NHẬP / ĐĂNG KÝ ============ */
+.account-dropdown-wrapper {
+    position: relative;
+}
+
+/* Menu Dropdown ẩn mặc định */
+.account-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 160px;
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-hover);
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    z-index: 1100;
+}
+
+/* Hiện menu khi hover vào vùng tài khoản */
+.account-dropdown-wrapper:hover .account-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    background: transparent;
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 13.5px;
+    color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.dropdown-item:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+/* Giao diện vùng nền mờ của Popup Modal */
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 31, 43, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.auth-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Khung nội dung Popup Form */
+.auth-modal-content {
+    background: var(--color-white);
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-hover);
+    padding: 30px;
+    position: relative;
+    transform: translateY(-3px);
+    transition: var(--transition);
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    background: transparent;
+    color: var(--color-gray);
+    transition: var(--transition);
+}
+
+.auth-modal-close:hover {
+    color: var(--color-danger);
+}
+
+/* Các Tab Đăng nhập / Đăng ký */
+.auth-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--color-gray-light);
+    margin-bottom: 24px;
+}
+
+.auth-tab-btn {
+    flex: 1;
+    background: transparent;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-gray);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: var(--transition);
+}
+
+.auth-tab-btn.active, .auth-tab-btn:hover {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+/* Ẩn hiện các Form Panel */
+.auth-panel {
+    display: none;
+}
+
+.auth-panel.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+.form-group-auth {
+    margin-bottom: 16px;
+}
+
+.form-group-auth label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.form-group-auth input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #E3E7EF;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-size: 13.5px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-group-auth input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    color: var(--color-gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.forgot-pass {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
